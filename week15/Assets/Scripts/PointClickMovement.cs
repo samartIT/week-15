@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,14 +12,14 @@ public class PointClickMovement : MonoBehaviour
     public float targetBuffer = 1.5f;
 
     private CharacterController _charController;
-    private Animation _animator;
+    private Animator _animator;
     private float _curSpeed = 0f;
     private Vector3 _targetPos = Vector3.one;
     // Start is called before the first frame update
     private void Start()
     {
         _charController = GetComponent<CharacterController>();
-        _animator = GetComponent<Animation>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
