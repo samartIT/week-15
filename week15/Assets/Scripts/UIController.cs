@@ -17,19 +17,19 @@ public class UIController : MonoBehaviour
         Messenger.RemoveListener(GameEvent.HEALTH_UPDATED, OnHealthUpdated);
     }
     // Update is called once per frame
-    private void Start()
+    void Start()
     {
         OnHealthUpdated();
         popup.gameObject.SetActive(false);
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))){
+        if (Input.GetKeyDown(KeyCode.M)){
             bool isShowing = popup.gameObject.activeSelf;
             popup.gameObject.SetActive(!isShowing);
-            popup.Refresh();
+            popup.Refresh();}
         }
-    }
+    
     void OnHealthUpdated()
     {
         string message = "Health: " + Managers.Player.health + "/" + Managers.Player.maxHealth;
