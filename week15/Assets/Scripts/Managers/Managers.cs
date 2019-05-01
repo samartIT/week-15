@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent (typeof(PlayerManager))]
 [RequireComponent(typeof(InventoryManager))]
-
+[RequireComponent(typeof(MissionManager))] // NEW ADD
 public class Managers : MonoBehaviour {
 	public static PlayerManager Player {
 		get;
@@ -16,15 +16,21 @@ public class Managers : MonoBehaviour {
 		private set;
 	}
 
+    public static MissionManager Mission { get; private set; } //New ADD
 	private List<IGameManager> _startSequence;
 
 	void Awake(){
+        //This method wil make sure game obj wil be passed to next scene
+        DontDestroyOnLoad(gameObject); // NEW ADD
+
 		Player = GetComponent<PlayerManager>();
 		Inventory = GetComponent<InventoryManager> ();
+        Mission = GetComponent<MissionManager>(); // NEW ADD
 
 		_startSequence = new List<IGameManager> ();
 		_startSequence.Add (Player);
 		_startSequence.Add (Inventory);
+        _startSequence.Add (Mission);   //NEW ADD
 
 		StartCoroutine (StartupManagers());
 	}
@@ -49,13 +55,17 @@ public class Managers : MonoBehaviour {
 				}
 			}
 
-			if (numReady < lastReady)
-				Debug.Log ("Progress = " + numReady + "/" + numModules);
-
+            if (numReady < lastReady)
+            {
+                Debug.Log("Progress = " + numReady + "/" + numModules);
+                Messenger<int, int>.Broadcast( //new add
+                    StartupEvent.MANAGERS_PROGRESS, numReady, numModules);
+            }
 			yield return null;
 		}
 
 		Debug.Log ("All managers started");
+        Messenger.Broadcast(StartupEvent.MANAGERS_STARTED); //NEW ADD
 	}
 
 	// Use this for initialization
