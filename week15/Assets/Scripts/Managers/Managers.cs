@@ -17,11 +17,7 @@ public class Managers : MonoBehaviour {
 		private set;
 	}
 
-    public static MissionManager Mission
-    {
-        get;
-        private set;
-    }
+    public static MissionManager Mission {get; private set; }
 
     private List<IGameManager> _startSequence;
 
@@ -36,7 +32,7 @@ public class Managers : MonoBehaviour {
 		_startSequence = new List<IGameManager> ();
 		_startSequence.Add (Player);
 		_startSequence.Add (Inventory);
-        _startSequence.Add(Mission);
+        _startSequence.Add (Mission);
 
         StartCoroutine (StartupManagers());
 	}
@@ -61,8 +57,7 @@ public class Managers : MonoBehaviour {
 				}
 			}
 
-            if (numReady < lastReady)
-            {
+            if (numReady < lastReady){
                 Debug.Log("Progress = " + numReady + "/" + numModules);
                 Messenger<int, int>.Broadcast(
                     StartupEvent.MANAGERS_PROGRESS, numReady, numModules);
@@ -72,15 +67,5 @@ public class Managers : MonoBehaviour {
 
 		Debug.Log ("All managers started");
         Messenger.Broadcast(StartupEvent.MANAGERS_STARTED);
-	}
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	}	
 }

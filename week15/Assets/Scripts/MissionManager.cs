@@ -12,7 +12,7 @@ public class MissionManager : MonoBehaviour, IGameManager
 
     private NetworkService _network;
 
-    public void StartUp(NetworkService service) {
+    public void Startup(NetworkService service) {
         Debug.Log("Mission Manager starting ...");
         _network = service;
         curLevel = 0;
@@ -21,15 +21,15 @@ public class MissionManager : MonoBehaviour, IGameManager
     }
 
     public void GoToNext() {
-        if (curLevel < maxLevel)
-        {
+        if (curLevel < maxLevel) {
             curLevel++;
             string name = "level" + curLevel;
             Debug.Log("Loading " + name);
             SceneManager.LoadScene(name);
-        }
-        else {
+        } else {
             Debug.Log("Last level");
         }
     }
+
+   
 }
