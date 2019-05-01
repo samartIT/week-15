@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MissionManager : MonoBehaviour
+public class MissionManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus status { get; private set; }
     public int curLevel { get; private set; }
