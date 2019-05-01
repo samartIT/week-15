@@ -1362,7 +1362,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 656304487}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 871660320}
+        m_MethodName: OnUse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &656304487
@@ -2177,6 +2188,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2985ab19250f5f479fb3af94ea03991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemIcons:
+  - {fileID: 221651046}
+  - {fileID: 1665899869}
+  - {fileID: 566712898}
+  - {fileID: 1857054917}
+  itemLabels:
+  - {fileID: 748320495}
+  - {fileID: 875789858}
+  - {fileID: 2092840304}
+  - {fileID: 2058356660}
+  curItemLabel: {fileID: 639132250}
+  equipButton: {fileID: 1088735481}
+  useButton: {fileID: 656304486}
 --- !u!1 &875789856
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,7 +3048,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1088735482}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 871660320}
+        m_MethodName: OnEquip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1088735482
