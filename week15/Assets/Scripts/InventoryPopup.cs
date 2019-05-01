@@ -37,7 +37,7 @@ public class InventoryPopup : MonoBehaviour
                 string message = "x" + count;
                 if (item == Managers.Inventory.equippedItem)
                 {
-                    message = "Equipped\n" + message;
+                    message = "Equipped/n" + message;
                 }
 
                 itemLabels[i].text = message;
