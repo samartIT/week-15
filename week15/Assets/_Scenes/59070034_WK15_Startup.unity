@@ -197,26 +197,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 132151262}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &28504824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28504823}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e96c9328bbc4472bc120d3c61ba7bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1079528384}
-  moveSpeed: 6
-  rotSpeed: 15
-  jumpSpeed: 15
-  gravity: -9.8
-  terminalVelocity: -20
-  minFall: -1.5
-  pushForce: 3
 --- !u!143 &28504825
 CharacterController:
   m_ObjectHideFlags: 0
@@ -491,7 +471,7 @@ GameObject:
   - component: {fileID: 125352985}
   - component: {fileID: 125352984}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Use Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -556,7 +536,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 125352985}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1645518237}
+        m_MethodName: OnUse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &125352985
@@ -1089,7 +1080,7 @@ GameObject:
   - component: {fileID: 381017143}
   - component: {fileID: 381017142}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Equip Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1154,7 +1145,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 381017143}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1645518237}
+        m_MethodName: OnEquip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &381017143
@@ -1420,7 +1422,7 @@ GameObject:
   - component: {fileID: 478396519}
   - component: {fileID: 478396518}
   m_Layer: 5
-  m_Name: Text (4)
+  m_Name: Select Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1442,7 +1444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120, y: -43}
+  m_AnchoredPosition: {x: -120, y: -40}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478396518
@@ -4736,6 +4738,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc06503559f68794b9e61741ad0088b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemIcons:
+  - {fileID: 1206206078}
+  - {fileID: 1274958258}
+  - {fileID: 547164311}
+  - {fileID: 1436697266}
+  itemLabels:
+  - {fileID: 447011287}
+  - {fileID: 199453593}
+  - {fileID: 1378277381}
+  - {fileID: 171691425}
+  curItemLabel: {fileID: 478396518}
+  equipButton: {fileID: 381017142}
+  useButton: {fileID: 125352984}
 --- !u!114 &1645518238
 MonoBehaviour:
   m_ObjectHideFlags: 0
