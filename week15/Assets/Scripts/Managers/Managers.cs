@@ -5,12 +5,14 @@ using UnityEngine;
 [RequireComponent (typeof(PlayerManager))]
 [RequireComponent(typeof(InventoryManager))]
 [RequireComponent(typeof(MissionManager))]
+[RequireComponent(typeof(DataManager))]
 
 public class Managers : MonoBehaviour {
 
 	public static PlayerManager Player {get;private set;}
 	public static InventoryManager Inventory {get;private set;}
     public static MissionManager Mission { get; private set; }
+    public static DataManager Data { get; private set; }
 
 	private List<IGameManager> _startSequence;
 
@@ -25,14 +27,15 @@ public class Managers : MonoBehaviour {
 		_startSequence.Add (Player);
 		_startSequence.Add (Inventory);
         _startSequence.Add(Mission);
+        _startSequence.Add(Data);
 
 		StartCoroutine (StartupManagers());
 	}
 
 	private IEnumerator StartupManagers(){
         NetworkService network = new NetworkService();
-		foreach (IGameManager mananger in _startSequence) {
-			mananger.Startup(network);
+		foreach (IGameManager manager in _startSequence) {
+			manager.Startup(network);
 		}
 
 		yield return null;

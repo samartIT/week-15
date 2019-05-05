@@ -9,11 +9,22 @@ public class UIController : MonoBehaviour
     [SerializeField] private InventoryPopup popup;
     [SerializeField] private Text levelEnding;
 
+    public void SaveGame()
+    {
+        Managers.Data.SaveGameState();
+    }
+
+    public void LoadGame()
+    {
+        Managers.Data.LoadGameState();
+    }
+
     void Awake()
     {
         Messenger.AddListener(GameEvent.HEALTH_UPDATED, OnHealthUpdated);
         Messenger.AddListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
         Messenger.AddListener(GameEvent.LEVEL_FAILSE, OnLevelFailed);
+        Messenger.AddListener(GameEvent.Game_COMPLETE, OnLevelComplete);
 
     }
     private void OnDestroy()
@@ -21,6 +32,7 @@ public class UIController : MonoBehaviour
         Messenger.RemoveListener(GameEvent.HEALTH_UPDATED, OnHealthUpdated);
         Messenger.RemoveListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
         Messenger.RemoveListener(GameEvent.LEVEL_FAILSE, OnLevelFailed);
+        Messenger.RemoveListener(GameEvent.Game_COMPLETE, OnLevelComplete);
     }
 
     void Start()
@@ -55,6 +67,12 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(2);
         Managers.Player.Respwan();
         Managers.Mission.RestartCurrent();
+    }
+
+    public void OnGameComplete()
+    {
+        levelEnding.gameObject.SetActive(true);
+        levelEnding.text = "You completed the game";
     }
 
     void Update()

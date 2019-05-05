@@ -26,6 +26,7 @@ public class MissionManager : MonoBehaviour, IGameManager
         curLevel = 0;
         maxLevel = 1;
         UpdateData(0, 1);
+        UpdateData(0, 2);
         status = ManagerStatus.Started;
     }
 
@@ -47,6 +48,7 @@ public class MissionManager : MonoBehaviour, IGameManager
         else
         {
             Debug.Log("Last Level");
+            Messenger.Broadcast(GameEvent.Game_COMPLETE);
         }
     }
 
