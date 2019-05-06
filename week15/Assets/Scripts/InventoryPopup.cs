@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Collections;
-using System.Collections.Generic;
 
 public class InventoryPopup : MonoBehaviour
 {
@@ -15,11 +15,10 @@ public class InventoryPopup : MonoBehaviour
 
     private string _curItem;
 
-    public void Refresh()
+   public void Refresh()
     {
         List<string> itemList = Managers.Inventory.GetItemList();
 
-        // display inventory items
         int len = itemIcons.Length;
         for (int i = 0; i < len; i++)
         {
@@ -32,7 +31,7 @@ public class InventoryPopup : MonoBehaviour
 
                 Sprite sprite = Resources.Load<Sprite>("Icons/" + item);
                 itemIcons[i].sprite = sprite;
-                itemIcons[i].SetNativeSize(); //resize image
+                itemLabels[i].SetNativeSize();
 
                 int count = Managers.Inventory.GetItemCount(item);
                 string message = "x" + count;
@@ -52,7 +51,8 @@ public class InventoryPopup : MonoBehaviour
                 EventTrigger trigger = itemIcons[i].GetComponent<EventTrigger>();
                 trigger.triggers.Clear();
                 trigger.triggers.Add(entry);
-            } else
+            }
+            else
             {
                 itemIcons[i].gameObject.SetActive(false);
                 itemLabels[i].gameObject.SetActive(false);
@@ -63,15 +63,45 @@ public class InventoryPopup : MonoBehaviour
         {
             _curItem = null;
         }
+
         if (_curItem == null)
         {
             curItemLabel.gameObject.SetActive(false);
             equipButton.gameObject.SetActive(false);
             useButton.gameObject.SetActive(false);
-        } else
+        }
+        else
         {
             curItemLabel.gameObject.SetActive(true);
             equipButton.gameObject.SetActive(true);
+            if (_curItem == "health")
+            {
+                useButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                useButton.gameObject.SetActive(false);
+            }
+            curItemLabel.text = _curItem + ":";
         }
+    }
+    public void OnItem(string item)
+    {
+        _curItem = item;
+        Refresh();
+    }
+    public void OnEquip()
+    {
+        Managers.Inventory.EquipItem(_curItem);
+        Refresh();
+    }
+    public void OnUse()
+    {
+        Managers.Inventory.ConsumeItem(_curItem);
+        if (_curItem == "health")
+        {
+            Managers.Player.ChangeHealth(25);
+        }
+        Refresh();
     }
 }

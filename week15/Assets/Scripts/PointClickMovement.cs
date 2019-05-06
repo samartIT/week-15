@@ -4,29 +4,30 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CharacterController))]
+
 public class PointClickMovement : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    public float moveSpeed = 6.0f;
-    public float rotSpeed = 15.0f;
+    public float movespeed = 6.0f;
+    public float rotspeed = 15.0f;
     public float deceleration = 20f;
     public float targetBuffer = 1.5f;
 
-    private CharacterController _charConroller;
+    private CharacterController _charController;
     private Animator _animator;
     private float _curSpeed = 0f;
     private Vector3 _targetPos = Vector3.one;
 
-     private void Start()
+    void Start()
     {
-        _charConroller = GetComponent<CharacterController>();
+        _charController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    
+    void Update()
     {
         Vector3 movement = Vector3.zero;
-
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -34,20 +35,18 @@ public class PointClickMovement : MonoBehaviour
             if(Physics.Raycast(ray, out mouseHit))
             {
                 _targetPos = mouseHit.point;
-                _curSpeed = moveSpeed;
+                _curSpeed = movespeed;
             }
         }
-
-        if(_targetPos != Vector3.one)
+        if (_targetPos != Vector3.one)
         {
-            Vector3 adjustedPos = new Vector3(_targetPos.x, transform.position.y, _targetPos.z);
-            Quaternion targetRot = Quaternion.LookRotation(adjustedPos - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotSpeed * Time.deltaTime);
+            Vector3 adjustPos = new Vector3(_targetPos.x, transform.position.y, _targetPos.z);
+            Quaternion targetRot = Quaternion.LookRotation(adjustPos - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot,rotspeed * Time.deltaTime);
             movement = _curSpeed * Vector3.forward;
             movement = transform.TransformDirection(movement);
         }
-
-        if(Vector3.Distance(_targetPos, transform.position) < targetBuffer)
+        if (Vector3.Distance(_targetPos,transform.position) < targetBuffer)
         {
             _curSpeed -= deceleration * Time.deltaTime;
             if (_curSpeed <= 0)
@@ -55,6 +54,6 @@ public class PointClickMovement : MonoBehaviour
         }
         _animator.SetFloat("Speed", movement.sqrMagnitude);
         movement *= Time.deltaTime;
-        _charConroller.Move(movement);
+        _charController.Move(movement);
     }
 }
