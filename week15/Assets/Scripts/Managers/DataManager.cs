@@ -32,6 +32,25 @@ public class DataManager : MonoBehaviour, IGameManager {
         stream.Close();
     }
 
-    public void LoadGameState
+    public void LoadGameState()
+    {
+        if (!File.Exists(_filename))
+        {
+            Debug.Log("No saved game");
+            return;
+        }
+
+        Dictionary<string, object> gamestate;
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = File.Open(_filename, FileMode.Open);
+        gamestate = formatter.Deserialize(stream) as Dictionary<string, object>;
+        stream.Close();
+
+        Managers.Inventory.UpdateData((Dictionary<string, int>)gamestate["inventory"]);
+        Managers.Player.UpdateData((int)gamestate["health"], (int)gamestate["maxHealth"]);
+        Managers.Player.UpdateData((int)gamestate["curLevel"], (int)gamestate["maxLevel"]);
+        Managers.Mission.RestartCurrent();
+
+    }
 
 }
