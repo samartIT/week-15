@@ -17,10 +17,22 @@ public class InventoryManager : MonoBehaviour, IGameManager {
 	public void Startup(NetworkService service) {
 		Debug.Log ("Inventory Manager starting ...");
         _network = service;
-		_items = new Dictionary<string, int>();
+        UpdateData(new Dictionary<string, int>());
+		//_items = new Dictionary<string, int>();
 		//		_items = new List<string>();
 		status = ManagerStatus.Started;
 	}
+
+    public void UpdateData(Dictionary<string, int> items)
+    {
+        _items = items;
+    }
+
+    public Dictionary<string, int> GetData()
+    {
+        return _items;
+    }
+
 
 	private void DisplayItems(){
 		string itemDisplay = "Item = ";

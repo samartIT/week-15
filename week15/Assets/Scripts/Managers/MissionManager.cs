@@ -27,6 +27,12 @@ public class MissionManager : MonoBehaviour , IGameManager {
         status = ManagerStatus.Started;
     }
 
+    public void UpdateData (int curLevel, int maxLevel)
+    {
+        this.curLevel = curLevel;
+        this.maxLevel = maxLevel;
+    }
+
     public void GoToNext()
     {
         if (curLevel < maxLevel)
