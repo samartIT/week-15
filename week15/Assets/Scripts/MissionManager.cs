@@ -1,16 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MissionManager : MonoBehaviour {
+public class MissionManager : MonoBehaviour , IGameManager {
+    public ManagerStatus status { get; private set; }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int curLevel { get; private set; }
+    public int maxLevel { get; private set; }
+
+    private NetworkService _network;
+
+    public void Startup (NetworkService service)
+    {
+        Debug.Log("Mission Manager starting ...");
+        _network = service;
+        curLevel = 0;
+        maxLevel = 1;
+        status = ManagerStatus.Started;
+    }
+
+    public void GoToNext()
+    {
+        if (curLevel < maxLevel)
+        {
+            curLevel++;
+            string name = "Level" + curLevel;
+            Debug.Log("Loading " + name);
+            SceneManager.LoadScene(name);
+        }
+        else
+        {
+            Debug.Log("Last level");
+        }
+    }
 }
