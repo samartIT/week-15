@@ -39,9 +39,73 @@ public class InventoryPopup : MonoBehaviour
                 {
                     message = "Equipped\n" + message;
                 }
-                itemLabels[i].text = message
+                itemLabels[i].text = message;
+
+                EventTrigger.Entry entry = new EventTrigger.Entry();
+                entry.eventID = EventTriggerType.PointerClick;
+                entry.callback.AddListener((BaseEventData data) =>
+                {
+                    OnItem(item);
+                });
+
+                EventTrigger trigger = itemIcons[i].GetComponent<EventTrigger>();
+                trigger.triggers.Clear();
+                trigger.triggers.Add(entry);
+            }
+            else
+            {
+                itemIcons[i].gameObject.SetActive(false);
+                itemLabels[i].gameObject.SetActive(false);
             }
         }
 
+        if (!itemList.Contains(_curItem))
+        {
+            _curItem = null;
+        }
+        if (_curItem == null)
+        {
+            curItemLabel.gameObject.SetActive(false);
+            equipButton.gameObject.SetActive(false);
+            useButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            curItemLabel.gameObject.SetActive(true);
+            equipButton.gameObject.SetActive(true);
+            if (_curItem == "health")
+            {
+                useButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                useButton.gameObject.SetActive(false);
+            }
+
+            curItemLabel.text = _curItem + ":";
+        }
+
+    }
+
+    public void OnItem(string item)
+    {
+        _curItem = item;
+        Refresh();
+    }
+
+    public void OnEquip()
+    {
+        Managers.Inventory.EquipItem(_curItem);
+        Refresh();
+    }
+
+    public void OnUse()
+    {
+        Managers.Inventory.ConsumeItem(_curItem);
+        if (_curItem == "health")
+        {
+            Managers.Player.ChangeHealth(25);
+        }
+        Refresh();
     }
 }
