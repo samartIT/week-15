@@ -2,4 +2,5 @@
 {
     public const string HEALTH_UPDATED = "HEALTH_UPDATED";
     public const string LEVEL_UPDATED = "LEVEL_UPDATED";
+    public const string LEVEL_FAILED = "LEVEL_FAILED";
 }
