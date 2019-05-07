@@ -11,6 +11,13 @@ public class MissionManager : MonoBehaviour , IGameManager {
 
     private NetworkService _network;
 
+    public void RestartCurrent()
+    {
+        string name = "Level" + curLevel;
+        Debug.Log("Loading" + name);
+        SceneManager.LoadScene(name);
+    }
+
     public void Startup (NetworkService service)
     {
         Debug.Log("Mission Manager starting ...");
