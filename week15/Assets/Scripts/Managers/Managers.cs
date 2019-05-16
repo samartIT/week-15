@@ -19,6 +19,7 @@ public class Managers : MonoBehaviour {
 	void Awake(){
         DontDestroyOnLoad(gameObject);
 
+        Data = GetComponent<DataManager>();
 		Player = GetComponent<PlayerManager>();
 		Inventory = GetComponent<InventoryManager> ();
         Mission = GetComponent<MissionManager>();
@@ -26,8 +27,8 @@ public class Managers : MonoBehaviour {
 		_startSequence = new List<IGameManager> ();
 		_startSequence.Add (Player);
 		_startSequence.Add (Inventory);
-        _startSequence.Add(Mission);
-        _startSequence.Add(Data);
+        _startSequence.Add (Mission);
+        _startSequence.Add (Data);
 
 		StartCoroutine (StartupManagers());
 	}
